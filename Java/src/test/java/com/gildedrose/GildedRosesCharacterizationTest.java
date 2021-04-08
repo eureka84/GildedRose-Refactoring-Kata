@@ -56,6 +56,19 @@ public class GildedRosesCharacterizationTest {
     }
 
     @Test
+    @DisplayName("Aged Brie with quality 50 and sellIn under 0")
+    void brie4() {
+        Item item = new Item("Aged Brie", -1, 50);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(-2, item.sellIn);
+        assertEquals(50, item.quality);
+    }
+
+
+    @Test
     @DisplayName("Backstage pass with quality over 50")
     void backstage1() {
         Item item = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 50);
