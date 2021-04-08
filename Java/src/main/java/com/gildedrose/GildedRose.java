@@ -7,8 +7,13 @@ class GildedRose {
 
     Item[] items;
 
+    private UpdateItemHandler[] handlers;
+
     public GildedRose(Item[] items) {
         this.items = items;
+        this.handlers = new UpdateItemHandler[]{
+            new AgedBrieUpdateHandler()
+        };
     }
 
     public void updateQuality() {
@@ -18,28 +23,31 @@ class GildedRose {
     }
 
     private void updateItem(Item item) {
+        for (UpdateItemHandler handler : this.handlers) {
+            if (handler.canHandle(item)){
+                handler.handle(item);
+                break;
+            }
+        }
         switch (item.name) {
             case SULFURAS_HAND_OF_RAGNAROS:
-                return;
-            case AGED_BRIE:
-                updateAgedBrie(item);
                 return;
             case BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT:
                 updateBackstage(item);
                 return;
             default:
-                updateGenericItem(item);
+                if (!AGED_BRIE.equals(item.name)) {
+                    updateGenericItem(item);
+                }
                 return;
         }
     }
 
     private void updateGenericItem(Item item) {
+        item.sellIn -= 1;
         if (item.quality > 0) {
             item.quality = item.quality - 1;
         }
-
-        item.sellIn = item.sellIn - 1;
-
         if (item.sellIn < 0) {
             if (item.quality > 0) {
                 item.quality = item.quality - 1;
@@ -48,6 +56,7 @@ class GildedRose {
     }
 
     private void updateBackstage(Item item) {
+        item.sellIn -= 1;
         if (item.quality < 50) {
             item.quality = item.quality + 1;
 
@@ -63,8 +72,6 @@ class GildedRose {
                 }
             }
         }
-        item.sellIn = item.sellIn - 1;
-
         if (item.sellIn < 0) {
             item.quality = 0;
         }
