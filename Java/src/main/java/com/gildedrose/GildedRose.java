@@ -1,6 +1,10 @@
 package com.gildedrose;
 
 class GildedRose {
+    private static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
+    private static final String AGED_BRIE = "Aged Brie";
+    private static final String BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
+
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -8,55 +12,71 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
+        for (Item item : items) {
+            updateItem(item);
+        }
+    }
 
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
+    private void updateItem(Item item) {
+        switch (item.name) {
+            case SULFURAS_HAND_OF_RAGNAROS:
+                return;
+            case AGED_BRIE:
+                updateAgedBrie(item);
+                return;
+            case BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT:
+                updateBackstage(item);
+                return;
+            default:
+                updateGenericItem(item);
+                return;
+        }
+    }
 
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-                    }
-                }
+    private void updateGenericItem(Item item) {
+        if (item.quality > 0) {
+            item.quality = item.quality - 1;
+        }
+
+        item.sellIn = item.sellIn - 1;
+
+        if (item.sellIn < 0) {
+            if (item.quality > 0) {
+                item.quality = item.quality - 1;
             }
+        }
+    }
 
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
+    private void updateBackstage(Item item) {
+        if (item.quality < 50) {
+            item.quality = item.quality + 1;
 
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                items[i].quality = items[i].quality - 1;
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
-                    }
-                } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1;
-                    }
+            if (item.sellIn < 11) {
+                if (item.quality < 50) {
+                    item.quality = item.quality + 1;
                 }
             }
+
+            if (item.sellIn < 6) {
+                if (item.quality < 50) {
+                    item.quality = item.quality + 1;
+                }
+            }
+        }
+        item.sellIn = item.sellIn - 1;
+
+        if (item.sellIn < 0) {
+            item.quality = 0;
+        }
+    }
+
+    private void updateAgedBrie(Item item) {
+        item.sellIn -= 1;
+        if (item.quality < 50) {
+            item.quality += 1;
+        }
+        if (item.sellIn < 0) {
+            item.quality += 1;
         }
     }
 }
