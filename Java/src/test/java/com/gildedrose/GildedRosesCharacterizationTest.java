@@ -158,4 +158,40 @@ public class GildedRosesCharacterizationTest {
         assertEquals(-2, item.sellIn);
         assertEquals(0, item.quality);
     }
+
+    @Test
+    @DisplayName("Generic item with sellIn and quality greater than 0")
+    void generic1() {
+        Item item = new Item("An Item", 10, 10);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(9, item.sellIn);
+        assertEquals(9, item.quality);
+    }
+
+    @Test
+    @DisplayName("Generic item with sellIn > 0 and quality 0")
+    void generic2() {
+        Item item = new Item("An Item", 10, 0);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(9, item.sellIn);
+        assertEquals(0, item.quality);
+    }
+
+    @Test
+    @DisplayName("Generic item with sellIn < 0 and quality > 0")
+    void generic3() {
+        Item item = new Item("An Item", -1, 10);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(-2, item.sellIn);
+        assertEquals(8, item.quality);
+    }
 }
