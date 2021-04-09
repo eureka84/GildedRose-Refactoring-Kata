@@ -8,7 +8,7 @@ class UpdateAgedBrieItem implements UpdateItem {
     }
 
     @Override
-    public void updateItem(Item item) {
+    public void handle(Item item) {
         if (item.quality < 50) {
             item.quality = item.quality + 1;
         }

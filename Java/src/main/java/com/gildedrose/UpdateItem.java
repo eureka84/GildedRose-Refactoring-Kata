@@ -1,7 +1,7 @@
 package com.gildedrose;
 
 public interface UpdateItem {
-    void updateItem(Item item);
+    void handle(Item item);
 
     boolean canHandle(Item item);
 }
