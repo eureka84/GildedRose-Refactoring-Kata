@@ -2,9 +2,11 @@ package com.gildedrose;
 
 class GildedRose {
     Item[] items;
+    private final UpdateAgedBrieItem updateAgedBrieItem;
 
     public GildedRose(Item[] items) {
         this.items = items;
+        updateAgedBrieItem = new UpdateAgedBrieItem();
     }
 
     public void updateQuality() {
@@ -17,8 +19,8 @@ class GildedRose {
         if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
             return;
         }
-        if (item.name.equals("Aged Brie")) {
-            updateAgedBrie(item);
+        if (updateAgedBrieItem.canHandle(item)) {
+            updateAgedBrieItem.updateItem(item);
         } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
             updateBackstagePass(item);
         } else {
@@ -60,19 +62,6 @@ class GildedRose {
 
         if (item.sellIn < 0) {
             item.quality = 0;
-        }
-    }
-
-    private void updateAgedBrie(Item item) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
-        }
-        item.sellIn = item.sellIn - 1;
-
-        if (item.sellIn < 0) {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1;
-            }
         }
     }
 
