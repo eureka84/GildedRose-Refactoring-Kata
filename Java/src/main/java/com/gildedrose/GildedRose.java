@@ -5,11 +5,13 @@ class GildedRose {
 
     private final UpdateItem updateAgedBrieItem;
     private final UpdateItem updateBackstageItem;
+    private final UpdateItem updateGenericItem;
 
     public GildedRose(Item[] items) {
         this.items = items;
         updateAgedBrieItem = new UpdateAgedBrieItem();
         updateBackstageItem = new UpdateBackstageItem();
+        updateGenericItem = new UpdateGenericItem();
     }
 
     public void updateQuality() {
@@ -26,23 +28,10 @@ class GildedRose {
             updateAgedBrieItem.handle(item);
         } else if (updateBackstageItem.canHandle(item)) {
             updateBackstageItem.handle(item);
-        } else {
-            updateGenericItem(item);
+        } else if(updateGenericItem.canHandle(item)) {
+            updateGenericItem.handle(item);
         }
 
-    }
-
-    private void updateGenericItem(Item item) {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
-        item.sellIn = item.sellIn - 1;
-
-        if (item.sellIn < 0) {
-            if (item.quality > 0) {
-                item.quality = item.quality - 1;
-            }
-        }
     }
 
 }
