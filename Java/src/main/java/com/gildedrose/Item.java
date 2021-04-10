@@ -30,6 +30,10 @@ public class Item {
         sellIn = sellIn - 1;
     }
 
+    void resetQuality() {
+        quality = 0;
+    }
+
     @Override
     public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
