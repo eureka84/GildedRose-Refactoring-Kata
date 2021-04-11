@@ -4,15 +4,16 @@ class GildedRose {
 
     Item[] items;
 
-    private UpdateItemHandler[] handlers;
+    private final UpdateItem[] updateItems;
 
     public GildedRose(Item[] items) {
         this.items = items;
-        this.handlers = new UpdateItemHandler[]{
-                new AgedBrieUpdateHandler(),
-                new BackstagePassUpdateHandler(),
-                new SulfurasUpdateHandler(),
-                new GenericItemUpdateHandler()
+
+        updateItems = new UpdateItem[]{
+                new SulfurasUpdateItem(),
+                new UpdateAgedBrieItem(),
+                new UpdateBackstageItem(),
+                new UpdateGenericItem()
         };
     }
 
@@ -23,10 +24,10 @@ class GildedRose {
     }
 
     private void updateItem(Item item) {
-        for (UpdateItemHandler handler : this.handlers) {
-            if (handler.canHandle(item)) {
-                handler.handle(item);
-                break;
+        for (UpdateItem updateItem : updateItems) {
+            if (updateItem.canHandle(item)){
+                updateItem.handle(item);
+                return;
             }
         }
     }
