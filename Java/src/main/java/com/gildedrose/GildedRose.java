@@ -10,7 +10,7 @@ class GildedRose {
         this.items = items;
 
         updateItems = new UpdateItem[]{
-                new SulfurasUpdateItem(),
+                new UpdateSulfurasItem(),
                 new UpdateAgedBrieItem(),
                 new UpdateBackstageItem(),
                 new UpdateGenericItem()

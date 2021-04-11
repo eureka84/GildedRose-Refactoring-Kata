@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-class SulfurasUpdateItem implements UpdateItem {
+class UpdateSulfurasItem implements UpdateItem {
 
     @Override
     public boolean canHandle(Item item) {
