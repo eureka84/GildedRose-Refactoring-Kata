@@ -8,6 +8,6 @@ class SulfurasUpdateItem implements UpdateItem {
     }
 
     @Override
-    public void handle(Item item) {
-    }
+    public void handle(Item item) { }
+
 }
