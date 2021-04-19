@@ -1,25 +1,20 @@
 package com.gildedrose;
 
-import com.gildedrose.factories.ChainedItemFactory;
-import com.gildedrose.items.Item;
-
 public class TexttestFixture {
     public static void main(String[] args) {
         System.out.println("OMGHAI!");
 
-        ChainedItemFactory itemFactory = new ChainedItemFactory();
-
         Item[] items = new Item[] {
-                itemFactory.create("+5 Dexterity Vest", 10, 20), //
-                itemFactory.create("Aged Brie", 2, 0), //
-                itemFactory.create("Elixir of the Mongoose", 5, 7), //
-                itemFactory.create("Sulfuras, Hand of Ragnaros", 0, 80), //
-                itemFactory.create("Sulfuras, Hand of Ragnaros", -1, 80),
-                itemFactory.create("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-                itemFactory.create("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-                itemFactory.create("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+                ItemFactory.create("+5 Dexterity Vest", 10, 20), //
+                ItemFactory.create("Aged Brie", 2, 0), //
+                ItemFactory.create("Elixir of the Mongoose", 5, 7), //
+                ItemFactory.create("Sulfuras, Hand of Ragnaros", 0, 80), //
+                ItemFactory.create("Sulfuras, Hand of Ragnaros", -1, 80),
+                ItemFactory.create("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+                ItemFactory.create("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+                ItemFactory.create("Backstage passes to a TAFKAL80ETC concert", 5, 49),
                 // this conjured item does not work properly yet
-                itemFactory.create("Conjured Mana Cake", 3, 6) };
+                ItemFactory.create("Conjured Mana Cake", 3, 6) };
 
         GildedRose app = new GildedRose(items);
 
