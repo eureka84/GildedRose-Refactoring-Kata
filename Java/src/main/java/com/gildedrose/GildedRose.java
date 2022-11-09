@@ -9,10 +9,10 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (!isAgedBrie(items[i])
-                    && !isBackstagePass(items[i])) {
+            if (!items[i].isAgedBrie()
+                    && !items[i].isBackstagePass()) {
                 if (items[i].quality > 0) {
-                    if (!isSulfuras(items[i])) {
+                    if (!items[i].isSulfuras()) {
                         items[i].quality = items[i].quality - 1;
                     }
                 }
@@ -20,7 +20,7 @@ class GildedRose {
                 if (items[i].quality < 50) {
                     items[i].quality = items[i].quality + 1;
 
-                    if (isBackstagePass(items[i])) {
+                    if (items[i].isBackstagePass()) {
                         if (items[i].sellIn < 11) {
                             if (items[i].quality < 50) {
                                 items[i].quality = items[i].quality + 1;
@@ -36,15 +36,15 @@ class GildedRose {
                 }
             }
 
-            if (!isSulfuras(items[i])) {
+            if (!items[i].isSulfuras()) {
                 items[i].sellIn = items[i].sellIn - 1;
             }
 
             if (items[i].sellIn < 0) {
-                if (!isAgedBrie(items[i])) {
-                    if (!isBackstagePass(items[i])) {
+                if (!items[i].isAgedBrie()) {
+                    if (!items[i].isBackstagePass()) {
                         if (items[i].quality > 0) {
-                            if (!isSulfuras(items[i])) {
+                            if (!items[i].isSulfuras()) {
                                 items[i].quality = items[i].quality - 1;
                             }
                         }
@@ -58,17 +58,5 @@ class GildedRose {
                 }
             }
         }
-    }
-
-    private boolean isSulfuras(Item item) {
-        return item.name.equals("Sulfuras, Hand of Ragnaros");
-    }
-
-    private boolean isBackstagePass(Item item) {
-        return item.name.equals("Backstage passes to a TAFKAL80ETC concert");
-    }
-
-    private boolean isAgedBrie(Item item) {
-        return item.name.equals("Aged Brie");
     }
 }

@@ -18,4 +18,16 @@ public class Item {
    public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
     }
+
+  public boolean isSulfuras() {
+      return name.equals("Sulfuras, Hand of Ragnaros");
+  }
+
+  public boolean isBackstagePass() {
+      return name.equals("Backstage passes to a TAFKAL80ETC concert");
+  }
+
+  public boolean isAgedBrie() {
+      return name.equals("Aged Brie");
+  }
 }
