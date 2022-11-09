@@ -8,23 +8,23 @@ public class Item {
 
     public int quality;
 
-    private Item(String name, int sellIn, int quality) {
+    protected Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
     }
 
     public static Item create(String name, int sellIn, int quality) {
+        if (SulfurasItem.NAME.equals(name)) {
+            return new SulfurasItem(sellIn, quality);
+        }
+
         return new Item(name, sellIn, quality);
     }
 
     @Override
     public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
-    }
-
-    private boolean isSulfuras() {
-        return name.equals("Sulfuras, Hand of Ragnaros");
     }
 
     private boolean isBackstagePass() {
@@ -70,8 +70,6 @@ public class Item {
             if (sellIn < 0) {
                 quality = 0;
             }
-
-        } else if (isSulfuras()) {
 
         } else {
             reduceQuality();
