@@ -15,11 +15,14 @@ public class Item {
     }
 
     public static Item create(String name, int sellIn, int quality) {
-        if (SulfurasItem.NAME.equals(name)) {
-            return new SulfurasItem(sellIn, quality);
+        switch (name) {
+            case SulfurasItem.NAME:
+                return new SulfurasItem(sellIn, quality);
+            case AgedBrieItem.NAME:
+                return new AgedBrieItem(sellIn, quality);
+            default:
+                return new Item(name, sellIn, quality);
         }
-
-        return new Item(name, sellIn, quality);
     }
 
     @Override
@@ -31,11 +34,7 @@ public class Item {
         return name.equals("Backstage passes to a TAFKAL80ETC concert");
     }
 
-    private boolean isAgedBrie() {
-        return name.equals("Aged Brie");
-    }
-
-    private void increaseQuality() {
+    protected void increaseQuality() {
         if (quality < 50) {
             quality = quality + 1;
         }
@@ -48,16 +47,7 @@ public class Item {
     }
 
     public void update() {
-        if (isAgedBrie()) {
-            increaseQuality();
-
-            sellIn = sellIn - 1;
-
-            if (sellIn < 0) {
-                increaseQuality();
-            }
-
-        } else if (isBackstagePass()) {
+        if (isBackstagePass()) {
             increaseQuality();
             if (sellIn < 11) {
                 increaseQuality();
