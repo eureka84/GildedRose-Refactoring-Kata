@@ -30,4 +30,10 @@ public class Item {
   public boolean isAgedBrie() {
       return name.equals("Aged Brie");
   }
+
+    public void increaseQuality() {
+        if (quality < 50) {
+            quality = quality + 1;
+        }
+    }
 }
