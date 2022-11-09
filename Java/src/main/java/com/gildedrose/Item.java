@@ -14,32 +14,68 @@ public class Item {
         this.quality = quality;
     }
 
-   @Override
-   public String toString() {
+    @Override
+    public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
     }
 
-  public boolean isSulfuras() {
-      return name.equals("Sulfuras, Hand of Ragnaros");
-  }
+    private boolean isSulfuras() {
+        return name.equals("Sulfuras, Hand of Ragnaros");
+    }
 
-  public boolean isBackstagePass() {
-      return name.equals("Backstage passes to a TAFKAL80ETC concert");
-  }
+    private boolean isBackstagePass() {
+        return name.equals("Backstage passes to a TAFKAL80ETC concert");
+    }
 
-  public boolean isAgedBrie() {
-      return name.equals("Aged Brie");
-  }
+    private boolean isAgedBrie() {
+        return name.equals("Aged Brie");
+    }
 
-    public void increaseQuality() {
+    private void increaseQuality() {
         if (quality < 50) {
             quality = quality + 1;
         }
     }
 
-    public void reduceQuality() {
+    private void reduceQuality() {
         if (quality > 0) {
             quality = quality - 1;
+        }
+    }
+
+    public void update() {
+        if (isAgedBrie()) {
+            increaseQuality();
+
+            sellIn = sellIn - 1;
+
+            if (sellIn < 0) {
+                increaseQuality();
+            }
+
+        } else if (isBackstagePass()) {
+            increaseQuality();
+            if (sellIn < 11) {
+                increaseQuality();
+            }
+
+            if (sellIn < 6) {
+                increaseQuality();
+            }
+            sellIn = sellIn - 1;
+            if (sellIn < 0) {
+                quality = 0;
+            }
+
+        } else if (isSulfuras()) {
+
+        } else {
+            reduceQuality();
+            sellIn = sellIn - 1;
+
+            if (sellIn < 0) {
+                reduceQuality();
+            }
         }
     }
 }
