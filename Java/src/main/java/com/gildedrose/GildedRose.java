@@ -13,17 +13,15 @@ class GildedRose {
             if (items[i].isAgedBrie()) {
                 items[i].increaseQuality();
             } else if (items[i].isBackstagePass()) {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
-
-                    if (items[i].sellIn < 11) {
-                        items[i].increaseQuality();
-                    }
-
-                    if (items[i].sellIn < 6) {
-                        items[i].increaseQuality();
-                    }
+                items[i].increaseQuality();
+                if (items[i].sellIn < 11) {
+                    items[i].increaseQuality();
                 }
+
+                if (items[i].sellIn < 6) {
+                    items[i].increaseQuality();
+                }
+
             } else if (items[i].isSulfuras()) {
 
             } else {
