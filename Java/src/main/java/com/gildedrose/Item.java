@@ -20,6 +20,8 @@ public class Item {
                 return new SulfurasItem(sellIn, quality);
             case AgedBrieItem.NAME:
                 return new AgedBrieItem(sellIn, quality);
+            case BackstagePassItem.NAME:
+                return new BackstagePassItem(sellIn, quality);
             default:
                 return new Item(name, sellIn, quality);
         }
@@ -28,10 +30,6 @@ public class Item {
     @Override
     public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
-    }
-
-    private boolean isBackstagePass() {
-        return name.equals("Backstage passes to a TAFKAL80ETC concert");
     }
 
     protected void increaseQuality() {
@@ -47,27 +45,11 @@ public class Item {
     }
 
     public void update() {
-        if (isBackstagePass()) {
-            increaseQuality();
-            if (sellIn < 11) {
-                increaseQuality();
-            }
+        reduceQuality();
+        sellIn = sellIn - 1;
 
-            if (sellIn < 6) {
-                increaseQuality();
-            }
-            sellIn = sellIn - 1;
-            if (sellIn < 0) {
-                quality = 0;
-            }
-
-        } else {
+        if (sellIn < 0) {
             reduceQuality();
-            sellIn = sellIn - 1;
-
-            if (sellIn < 0) {
-                reduceQuality();
-            }
         }
     }
 }
