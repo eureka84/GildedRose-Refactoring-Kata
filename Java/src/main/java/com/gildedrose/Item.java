@@ -36,4 +36,10 @@ public class Item {
             quality = quality + 1;
         }
     }
+
+    public void reduceQuality() {
+        if (quality > 0) {
+            quality = quality - 1;
+        }
+    }
 }

@@ -24,12 +24,10 @@ class GildedRose {
                         items[i].increaseQuality();
                     }
                 }
+            } else if (items[i].isSulfuras()) {
+
             } else {
-                if (items[i].quality > 0) {
-                    if (!items[i].isSulfuras()) {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
+                items[i].reduceQuality();
             }
 
             if (!items[i].isSulfuras()) {
@@ -40,13 +38,11 @@ class GildedRose {
                 if (items[i].isAgedBrie()) {
                     items[i].increaseQuality();
                 } else if (items[i].isBackstagePass()) {
-                    items[i].quality = items[i].quality - items[i].quality;
+                    items[i].quality = 0;
+                } else if (items[i].isSulfuras()) {
+
                 } else {
-                    if (items[i].quality > 0) {
-                        if (!items[i].isSulfuras()) {
-                            items[i].quality = items[i].quality - 1;
-                        }
-                    }
+                    items[i].reduceQuality();
                 }
             }
         }
